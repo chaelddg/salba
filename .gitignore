@@ -1,0 +1,9 @@
+node_modules
+public/lib/jquery
+public/lib/jquery.cookie
+public/lib/jquery-placeholder
+public/lib/fastclick
+public/lib/foundation
+public/lib/foundation-icon-fonts
+public/lib/modernizr
+.idea
