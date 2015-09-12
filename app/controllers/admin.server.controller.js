@@ -1,5 +1,6 @@
 var User = require('mongoose').model('User');
 var Book = require('mongoose').model('Book');
+var AdminLogs = require('mongoose').model('AdminLogs');
 var Request = require('mongoose').model('Request');
 var moment = require('moment');
 var ObjectID = require("bson-objectid");
@@ -338,7 +339,7 @@ exports.adminBorrowerListPOST = function(req, res) {
                 // book.qty = Number(book.qty) - 1;
                 book.save(function (err) {
                     if(err) console.log(err);
-                    res.redirect("/admin/dashboard/profile/" + data.userid);
+                    res.redirect("/admin/dashboard/reserveprofile/" + data.userid);
                 });
             });
 
@@ -513,5 +514,7 @@ exports.adminUpdateBookPOST = function (req, res) {
     });
 };
 
-// ************************************************
+// ****************** CREATE LOGS ******************
+
+
 

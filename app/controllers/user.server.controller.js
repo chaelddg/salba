@@ -335,11 +335,11 @@ exports.userHistoryBooksGET = function(req, res) {
     });
 };
 
-// BORROWED BOOKS
+// RESERVED BOOKS
 
 exports.userReservedBooksGET = function(req, res) {
 
-    Request.find({userid: ObjectID(req.user._id) }).exec(function(err, data) {
+    Request.find({userid: ObjectID(req.user._id), $or:[ { status: "" }, { status: "pending" }, { status: "reserved" } ]}).exec(function(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -358,3 +358,29 @@ exports.userReservedBooksGET = function(req, res) {
     });
 
 };
+
+// BORROWED BOOKS
+
+exports.userBorrowedBooksGET = function(req, res) {
+
+    Request.find({userid: ObjectID(req.user._id), status: "borrowed" }).exec(function(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        if (req.user && req.user.role == 'user') {
+          console.log(data);
+          res.render('user/userBorrowedBooks', {
+              title: 'Reserved Books',
+              bookData: data,
+              user: req.user ? req.user.fullName: "",
+              moment: moment
+          });
+        } else {
+            return res.redirect('/');
+        }
+      }
+    });
+
+};
+
+

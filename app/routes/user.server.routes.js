@@ -28,7 +28,10 @@ module.exports = function(app) {
     app.get('/dashboard/literature', user.userLiteratureBooksGET);
     app.get('/dashboard/history', user.userHistoryBooksGET);
 
-    // BORROWED BOOKS
+    // RESERVED BOOKS
     app.get('/dashboard/reserved', user.userReservedBooksGET);
+
+    // BORROWED BOOKS
+    app.get('/dashboard/borrowed', user.userBorrowedBooksGET);
 
 };
