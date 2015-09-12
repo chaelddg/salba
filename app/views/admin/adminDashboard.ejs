@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/lib/foundation/css/foundation.css">
+</head>
+<body>
+
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+      <nav class="tab-bar">
+        <section class="left-small">
+          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        </section>
+
+        <section class="middle tab-bar-section">
+          <h1 class="title">Admin</h1>
+        </section>
+
+        <section class="right">
+          <a href="/signout">Sign Out</a>
+        </section>
+
+      </nav>
+
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li><label>Menu</label></li>
+          <li><a href="/admin/dashboard">Book Categories</a></li>
+          <li><a href="/admin/dashboard/borrowerreservelist">Borrowers Reserved List</a></li>
+          <li><a href="/admin/dashboard/borrowers">Borrowers</a></li>
+          <li><a href="/admin/dashboard/borrowerrequest">Borrower Request</a></li>
+        </ul>
+      </aside>
+
+      <section class="row" id="content-section">
+
+         <div>
+            <h1>Categories</h1>
+
+            <ul className="side-nav">
+              <li><a href="/admin/dashboard/itbooks">Computer science, information and general works</a></li>
+              <li><a href="/admin/dashboard/pyschbooks">Philosophy and psychology</a></li>
+              <li><a href="/admin/dashboard/religion">Religion</a></li>
+              <li><a href="/admin/dashboard/literature">Literature</a></li>
+              <li><a href="/admin/dashboard/history">History and geography</a></li>
+            </ul>
+        </div>
+
+
+      </section>
+
+      <a class="exit-off-canvas"></a>
+
+    </div>
+  </div>
+
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/foundation/js/foundation.js"></script>
+    <script type="text/javascript" src="/assets/js/foundation.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/lib/foundation/css/foundation.css">
+    <link rel="stylesheet" type="text/css" href="/lib/foundation-icon-fonts/foundation-icons.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/login.css">
+    <link rel="shortcut icon" href="/assets/img/book.ico">
+</head>
+<body>
+
+      <div class="login">
+        <div class="login-screen">
+          <div>
+            <h1 class="app-title">Login</h1>
+          </div>
+
+          <div class="login-form">
+            <form method="POST" accept="/admin">
+              <div class="control-group">
+                <input type="text" class="login-field" name="username" placeholder="username" id="login-name">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
+
+                <div class="control-group">
+                <input type="password" class="login-field" name="password" value="" placeholder="password" id="login-pass">
+                <label class="login-field-icon fui-lock" for="login-pass"></label>
+                </div>
+
+                <input type="submit" value="login" class="btn btn-primary btn-large btn-block">
+              </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

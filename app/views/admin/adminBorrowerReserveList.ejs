@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/lib/foundation/css/foundation.css">
+    <link rel="stylesheet" type="text/css" href="/lib/foundation-icon-fonts/foundation-icons.css">
+    <link rel="stylesheet" type="text/css" href="/lib/datatable/media/css/jquery.dataTables.css">
+</head>
+<body>
+
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+      <nav class="tab-bar">
+        <section class="left-small">
+          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        </section>
+
+        <section class="middle tab-bar-section">
+          <h1 class="title">Admin</h1>
+        </section>
+
+        <section class="right">
+          <a href="/signout">Sign Out</a>
+        </section>
+
+      </nav>
+
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li><label>Menu</label></li>
+          <li><a href="/admin/dashboard">Book Categories</a></li>
+          <li><a href="/admin/dashboard/borrowerreservelist">Borrowers Reserved List</a></li>
+          <li><a href="/admin/dashboard/borrowers">Borrowers</a></li>
+          <li><a href="/admin/dashboard/borrowerrequest">Borrower Requests</a></li>
+        </ul>
+      </aside>
+
+      <section class="row" id="content-section">
+
+        <div id="addComputerBookModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">Computer Book</h2>
+          <p class="lead">test</p>
+          <p>test</p>
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+
+        <div id="printComputerBookModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">PRINT Data</h2>
+          <p class="lead">test</p>
+          <p>test</p>
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+
+        <nav class="breadcrumbs" style="margin-top: 10px" role="menubar" aria-label="breadcrumbs">
+          <li role="menuitem"><a href="/admin/dashboard">Category</a></li>
+          <li role="menuitem" class="current"><a href="#">Borrowers Reserved List</a></li>
+        </nav>
+
+        <br />
+
+        <div class="panel" style="height: 73px">
+          <dl class="sub-nav">
+            <dt>Actions:</dt>
+            <dd><a href="#" data-reveal-id="printComputerBookModal"><i class="fi-print"> Print</i></a></dd>
+          </dl>
+        </div>
+
+        <div>
+
+        <table id="borrowers_table" style="margin-top: 10px; width: 100%">
+          <thead>
+            <tr>
+              <th style="text-align: center">ID Number</th>
+              <th style="text-align: center">Name</th>
+              <th style="text-align: center">Course</th>
+              <th style="text-align: center">Year</th>
+            </tr>
+          </thead>
+          <tbody>
+             <% if(borrowerData) { %>
+                <% borrowerData.forEach(function(data, i) {%>
+                  <% if(data.role == "user") { %>
+                    <tr>
+                      <td style="text-align: center"><%= data.username %></td>
+                      <td style="text-align: center">
+                          <a href="/admin/dashboard/reserveprofile/<%=data._id%>"><%= data.firstName ? data.firstName + " " + data.lastName : "" %></a>
+                      </td>
+                      <td style="text-align: center"><%= data.course ? data.course : "" %></td>
+                      <td style="text-align: center"><%= data.year ? data.year : "" %></td>
+                    </tr>
+                  <% } %>
+                <% }); %>
+             <% } %>
+          </tbody>
+        </table>
+
+        </div>
+
+
+      </section>
+
+      <a class="exit-off-canvas"></a>
+
+    </div>
+  </div>
+
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/foundation/js/foundation.js"></script>
+    <script type="text/javascript" src="/lib/datatable/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="/assets/js/datatable.js"></script>
+    <script type="text/javascript" src="/assets/js/foundation.js"></script>
+</body>
+</html>

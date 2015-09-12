@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/lib/foundation/css/foundation.css">
+    <link rel="stylesheet" type="text/css" href="/lib/foundation-icon-fonts/foundation-icons.css">
+    <link rel="stylesheet" type="text/css" href="/lib/datatable/media/css/jquery.dataTables.css">
+</head>
+<body>
+
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+      <nav class="tab-bar">
+        <section class="left-small">
+          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        </section>
+
+        <section class="middle tab-bar-section">
+          <h1 class="title">Admin</h1>
+        </section>
+
+        <section class="right">
+          <a href="/signout">Sign Out</a>
+        </section>
+
+      </nav>
+
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li><label>Menu</label></li>
+          <li><a href="/admin/dashboard">Book Categories</a></li>
+          <li><a href="/admin/dashboard/borrowerreservelist">Borrowers Reserved List</a></li>
+          <li><a href="/admin/dashboard/borrowers">Borrowers</a></li>
+          <li><a href="/admin/dashboard/borrowerrequest">Borrower Request</a></li>
+        </ul>
+      </aside>
+
+      <section class="row" id="content-section">
+
+      <!-- ************* MODAL ******************* -->
+
+        <div id="addComputerBookModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <form method="POST" action="/addNewReligionBook">
+            <div class="row">
+              <div class="large-12 columns">
+                <label>Title
+                  <input type="text" name="title" placeholder="Title" required="required" />
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-4 columns">
+                <label>ISBN
+                  <input type="text" name="isbn" placeholder="ISBN" required="required" />
+                </label>
+              </div>
+              <div class="large-4 columns">
+                <label>Author
+                  <input type="text" name="author" placeholder="Author" required="required" />
+                </label>
+              </div>
+              <div class="large-4 columns">
+                <label>Quantity
+                  <input type="number" name="qty" placeholder="Quantity" required="required" />
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <label>
+                  <input type="submit" class="button expand" onclick="window.location.reload()"value="Add Book" />
+                </label>
+              </div>
+            </div>
+          </form>
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+
+        <!-- END MODAL -->
+
+        <div id="printComputerBookModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">PRINT Religion Book</h2>
+          <p class="lead">test</p>
+          <p>test</p>
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+
+        <nav class="breadcrumbs" style="margin-top: 10px" role="menubar" aria-label="breadcrumbs">
+          <li role="menuitem"><a href="/admin/dashboard">Category</a></li>
+          <li role="menuitem" class="current"><a href="#">Religion Books</a></li>
+        </nav>
+
+        <br />
+
+        <div class="panel" style="height: 73px">
+          <dl class="sub-nav">
+            <dt>Actions:</dt>
+            <dd><a href="#" data-reveal-id="addComputerBookModal"><i class="fi-plus"> Add Book</i></a></dd>
+            <dd><a href="#" data-reveal-id="printComputerBookModal"><i class="fi-print"> Print</i></a></dd>
+          </dl>
+        </div>
+
+        <div>
+
+        <table id="inventory_table" style="margin-top: 10px; width: 100%">
+          <thead>
+            <tr>
+              <th style="text-align: center">Book</th>
+              <th style="text-align: center">ISBN</th>
+              <th style="text-align: center">Title</th>
+              <th style="text-align: center">Author</th>
+              <th style="text-align: center">Qty</th>
+              <th style="text-align: center">Date Added</th>
+              <th style="text-align: center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+             <% bookData.forEach(function(data, i) {%>
+              <tr>
+                <td style="text-align: center">
+                  <p><img style="width: 50px; height: 50px" src="/assets/img/book_icon2.png" /></p>
+                </td>
+                <td style="text-align: center"><%= data.isbn %></td>
+                <td style="text-align: center"><%= data.title %></td>
+                <td style="text-align: center"><%= data.author %></td>
+                <td style="text-align: center"><span><%= data.qty %></span></td>
+                <td style="text-align: center"><span><%= moment(data.added).format('llll') %></span></td>
+                <td style="text-align: center">
+                  <p style="padding-top: 28px">
+                    <button class="button tiny" style="background-color: transparent" title="Delete Book">
+                      <i class="fi-trash" style="color: red; font-size: 24px"></i>
+                    </button>
+                    <button class="button tiny" title="Edit Book" style="margin-left:5px; background-color: transparent">
+                      <i class="fi-page-edit" style="color: green; font-size: 24px"></i>
+                    </button>
+                  </p>
+                </td>
+               </tr>
+            <% }); %>
+          </tbody>
+        </table>
+
+        </div>
+
+
+      </section>
+
+      <a class="exit-off-canvas"></a>
+
+    </div>
+  </div>
+
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/foundation/js/foundation.js"></script>
+    <script type="text/javascript" src="/lib/datatable/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="/assets/js/datatable.js"></script>
+    <script type="text/javascript" src="/assets/js/foundation.js"></script>
+</body>
+</html>

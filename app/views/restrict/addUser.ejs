@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/lib/foundation/css/foundation.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/login.css">
+</head>
+<body>
+
+    <div class="large-3 large-centered columns">
+        <div class="login-box">
+          <div class="row">
+            <div class="large-12 columns">
+              <h4 class="text-center">Add User Account</h4>
+              <form method="POST" action="/_restrict/addUser">
+                  <div class="row">
+                   <div class="large-12 columns">
+                       <input type="text" name="firstName" placeholder="First Name" />
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="large-12 columns">
+                       <input type="text" name="lastName" placeholder="Last Name" />
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="large-12 columns">
+                       <input type="text" name="course" placeholder="Course" />
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="large-12 columns">
+                       <input type="text" name="year" placeholder="Year" />
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="large-12 columns">
+                       <input type="text" name="username" placeholder="Username" />
+                   </div>
+                 </div>
+                <div class="row">
+                   <div class="large-12 columns">
+                       <input type="password" name="password" placeholder="Password" />
+                   </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 large-centered columns">
+                    <input type="submit" class="button expand login-button" value="Add User"/>
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>
