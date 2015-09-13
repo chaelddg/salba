@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "foundation": "~5.5.2",
-    "foundation-icon-fonts": "*"
+    "foundation-icon-fonts": "*",
+    "jspdf": "~1.1.135"
   }
 }

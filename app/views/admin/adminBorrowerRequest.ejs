@@ -30,8 +30,9 @@
         <ul class="off-canvas-list">
           <li><label>Menu</label></li>
           <li><a href="/admin/dashboard">Book Categories</a></li>
-          <li><a href="/admin/dashboard/borrowerreservelist">Borrowers Reserved List</a></li>
+          <li><a href="/admin/dashboard/logs">Logs</a></li>
           <li><a href="/admin/dashboard/borrowers">Borrowers</a></li>
+          <li><a href="/admin/dashboard/borrowerreservelist">Borrowers Reserved List</a></li>
           <li><a href="/admin/dashboard/borrowerrequest">Borrower Requests</a></li>
         </ul>
       </aside>
@@ -54,7 +55,7 @@
 
         <div id="decline-modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
             <p id="decline-test"></p>
-            <form method="POST" action="/admin/dashboard/borrwerdecline">
+            <form method="POST" action="/admin/dashboard/borrwerdeleterequest">
                 <div class="row">
                     <div class="large-12 columns">
                         <label>

@@ -2,6 +2,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var AdminLogsSchema = new Schema({
+    requestid: {
+        type: String,
+        required: 'Request ID is required'
+    },
     idnumber: {
         type: String,
         required: 'ID Number is required'

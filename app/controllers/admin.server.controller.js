@@ -322,29 +322,61 @@ exports.adminBorrowerListPOST = function(req, res) {
   console.log(req.body);
   var reqid = req.body.accept_reqid;
 
-  Request.findOne({_id: ObjectID(reqid)}).exec(function(err, data) {
-      if (err) {
-        console.log(err);
-      } else {
+  async.waterfall([
+        function(callback) {
+          Request.findOne({_id: ObjectID(reqid)}).exec(function(err, data) {
+            if (err) {
+              console.log(err);
+            } else {
+              data.status = "borrowed";
+              data.start_date = new Date(moment());
+              data.due_date = new Date(moment().add(3, 'days'));
+              data.save(function (err) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  callback(null, data);
+                }
+              });
+            }
+          });
+        },
+        function(arg1, callback) {
+          Book.findOne({_id: ObjectID(arg1.bookid)}, function (err, book) {
+              // book.qty = Number(book.qty) - 1;
+              console.log("*********************");
+              console.log(book.qty);
+              // book.qty = Number(book.qty) - 1;
+              book.save(function (err) {
+                  if(err) console.log(err);
+                  callback(null, arg1, book);
+              });
+          });
+        },
+        function(arg1, arg2, callback) {
+            // arg1 now equals 'three'
+            User.findOne({_id: ObjectID(arg1.userid)}, function(err, user) {
+              var adminlogs = new AdminLogs();
 
-        data.status = "borrowed";
-        data.start_date = new Date(moment());
-        data.due_date = new Date(moment().add(3, 'days'));
-        data.save(function (err) {
+              adminlogs.requestid = arg1._id,
+              adminlogs.idnumber = user.username,
+              adminlogs.name = user.firstName + " " + user.lastName,
+              adminlogs.course = user.course,
+              adminlogs.year = user.year,
+              adminlogs.isbn = arg2.isbn,
+              adminlogs.title = arg2.title,
+              adminlogs.author = arg2.author,
+              adminlogs.category = arg2.category;
 
-            Book.findOne({_id: ObjectID(data.bookid)}, function (err, book) {
-                // book.qty = Number(book.qty) - 1;
-                console.log("*********************");
-                console.log(book.qty);
-                // book.qty = Number(book.qty) - 1;
-                book.save(function (err) {
-                    if(err) console.log(err);
-                    res.redirect("/admin/dashboard/reserveprofile/" + data.userid);
-                });
+              adminlogs.save(function(err) {
+                  res.redirect("/admin/dashboard/reserveprofile/" + arg1.userid);
+                  callback(null, 'done');
+              });
             });
-
-        });
-      }
+        }
+    ], function (err, result) {
+        // result now equals 'done'
+        console.log(err);
     });
 
 };
@@ -376,17 +408,55 @@ exports.adminBorrowerResponsePOST = function(req, res) {
     });
 };
 
-// DECLINE REQUEST
+// DELETE REQUEST
 exports.adminDeclineBookRequestPOST = function (req, res) {
     console.log("*************** decline **************");
     console.log(req.body);
-    Request.remove({_id: ObjectID(req.body.declinebookid)}).exec(function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-           res.redirect("/admin/dashboard/borrowerrequest");
+    async.waterfall([
+        function(callback) {
+            Request.findOne({_id: ObjectID(req.body.decline_reqid)}).exec(function(err, data) {
+              if (err) {
+                  console.log(err);
+              } else {
+                 console.log(data);
+                 callback(null, data);
+                 // res.redirect("/admin/dashboard/borrowerrequest");
+              }
+          });
+        },
+        function(arg1, callback) {
+            Book.findOne({_id: ObjectID(arg1.bookid)}, function (err, book) {
+                book.qty = Number(book.qty) + 1;
+                book.save(function(err) {
+                  if (err) {console.log(err)};
+                  callback(null, arg1, book);
+                });
+            });
+        },
+        function(arg1, arg2, callback) {
+            // arg1 now equals 'three'
+            Request.remove({_id: ObjectID(arg1._id)}).exec(function(err, data) {
+              if (err) {
+                  console.log(err);
+              } else {
+                 // console.log(data);
+                 res.redirect("/admin/dashboard/borrowers");
+                 callback(null, 'done');
+              }
+          });
         }
+    ], function (err, result) {
+        // result now equals 'done'
+        console.log(err);
     });
+
+};
+
+exports.adminBorrowerDeleteRequestPOST = function(req, res) {
+  Request.remove({_id: ObjectID(req.body.declinebookid)}).exec(function(err, data) {
+    if (err) {console.log(err)};
+    res.redirect("/admin/dashboard/borrowerrequest");
+  });
 };
 
 exports.adminBorrowerRequestPOST = function (req, res) {
@@ -514,7 +584,24 @@ exports.adminUpdateBookPOST = function (req, res) {
     });
 };
 
-// ****************** CREATE LOGS ******************
-
+// ADMIN LOGS
+exports.adminBorrowerLogsGET = function(req, res) {
+  AdminLogs.find().exec(function(err, data) {
+    if (err) {
+        console.log(err);
+      } else {
+        if (req.user && req.user.role == 'admin') {
+          console.log(data);
+          res.render('admin/adminBorrowerLogs', {
+              title: 'Borrower Logs',
+              borrowerData: data,
+              moment: moment
+          });
+        } else {
+            return res.redirect('/');
+        }
+      }
+  });
+};
 
 

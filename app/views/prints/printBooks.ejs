@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/lib/foundation/css/foundation.css">
+    <link rel="stylesheet" type="text/css" href="/lib/foundation-icon-fonts/foundation-icons.css">
+</head>
+<body>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <div id="container">
+          <h4><%= title %></h4>
+          <table style="margin-top: 10px; width: 100%">
+            <thead>
+              <tr>
+                <th style="text-align: center">ISBN</th>
+                <th style="text-align: center">Title</th>
+                <th style="text-align: center">Author</th>
+                <th style="text-align: center">Qty</th>
+                <th style="text-align: center">Date Added</th>
+                <th style="text-align: center">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+               <% bookData.forEach(function(data, i) {%>
+
+                <tr data-tr="<%= data._id %>">
+                  <td style="text-align: center"><%= data.isbn %></td>
+                  <td style="text-align: center" class="<%= data._id %>"><%= data.title %></td>
+                  <td style="text-align: center"><%= data.author %></td>
+                  <td style="text-align: center"><span><%= data.qty %></span></td>
+                  <td style="text-align: center"><span><%= moment(data.added).format('llll') %></span></td>
+                  <td style="text-align: center"><span><%= data.status %></span></td>
+                 </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/foundation/js/foundation.js"></script>
+    <script type="text/javascript" src="/lib/jspdf/dist/jspdf.min.js"></script>
+    <script type="text/javascript" src="/assets/js/foundation.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+           var pdf = new jsPDF('l', 'pt', 'letter');
+          // source can be HTML-formatted string, or a reference
+          // to an actual DOM element from which the text will be scraped.
+          source = $('#container')[0];
+
+          // we support special element handlers. Register them with jQuery-style
+          // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+          // There is no support for any other type of selectors
+          // (class, of compound) at this time.
+          specialElementHandlers = {
+              // element with id of "bypass" - jQuery style selector
+              '#bypassme': function (element, renderer) {
+                  // true = "handled elsewhere, bypass text extraction"
+                  return true
+              }
+          };
+          margins = {
+              top: 80,
+              bottom: 60,
+              left: 40,
+              width: 522
+          };
+          // all coords and widths are in jsPDF instance's declared units
+          // 'inches' in this case
+          pdf.fromHTML(
+          source, // HTML string or DOM elem ref.
+          margins.left, // x coord
+          margins.top, { // y coord
+              'width': margins.width, // max width of content on PDF
+              'elementHandlers': specialElementHandlers
+          });
+
+          pdf.output('dataurl');
+        });
+    </script>
+</body>
+</html>

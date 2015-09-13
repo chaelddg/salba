@@ -37,6 +37,7 @@ module.exports = function(app) {
     app.post('/admin/dashboard/borrowerrequest', admin.adminBorrowerRequestPOST);
     app.post('/admin/dashboard/borrowerresponse', admin.adminBorrowerResponsePOST);
     app.post('/admin/dashboard/borrwerdecline', admin.adminDeclineBookRequestPOST);
+    app.post('/admin/dashboard/borrwerdeleterequest', admin.adminBorrowerDeleteRequestPOST);
 
     // BORROWER SAVE
     app.post('/admin/dashboard/borrowers', admin.adminBorrowerListPOST);
@@ -50,5 +51,11 @@ module.exports = function(app) {
 
     // UPDATE A BOOK
     app.post('/admin/dashboard/updatebook', admin.adminUpdateBookPOST);
+
+    // LOGS
+    app.get('/admin/dashboard/logs', admin.adminBorrowerLogsGET);
+
+    // PDF GENERATE
+    // app.get('/admin/dashboard/pdf', admin.adminGeneratePDFGET);
 
 };

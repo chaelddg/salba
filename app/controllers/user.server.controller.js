@@ -1,5 +1,6 @@
 var User = require('mongoose').model('User');
 var Book = require('mongoose').model('Book');
+var AdminLogs = require('mongoose').model('AdminLogs');
 var Request = require('mongoose').model('Request');
 var ObjectID = require("bson-objectid");
 var async = require('async');
@@ -383,4 +384,24 @@ exports.userBorrowedBooksGET = function(req, res) {
 
 };
 
-
+exports.userBorrowerLogsGET = function(req, res) {
+    User.findOne({_id: ObjectID(req.user.id)}, function(err, user) {
+        AdminLogs.find({idnumber: user.username}, function(err, data) {
+            if (err) {
+                console.log(err)
+            } else {
+                if (req.user && req.user.role == 'user') {
+                  console.log(data);
+                  res.render('user/userBorrowerLogs', {
+                      title: 'Logs',
+                      borrowerData: data,
+                      user: req.user ? req.user.fullName: "",
+                      moment: moment
+                  });
+                } else {
+                    return res.redirect('/');
+                }
+            }
+        });
+    });
+};

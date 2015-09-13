@@ -34,4 +34,7 @@ module.exports = function(app) {
     // BORROWED BOOKS
     app.get('/dashboard/borrowed', user.userBorrowedBooksGET);
 
+    // LOGS
+    app.get('/dashboard/logs', user.userBorrowerLogsGET);
+
 };
