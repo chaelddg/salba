@@ -11,4 +11,21 @@ module.exports = function(app) {
     // test
     app.get('/renderpdf', book.renderPDF);
 
+    // delete routes
+
+    app.post('/deletebook/itbooks', book.bookDeleteITBookPOST);
+    app.post('/deletebook/history', book.bookDeleteHistoryBookPOST);
+    app.post('/deletebook/literature', book.bookDeleteLiteratureBookPOST);
+    app.post('/deletebook/psych', book.bookDeletePsychBookPOST);
+    app.post('/deletebook/religion', book.bookDeleteReligionBookPOST);
+
+
+    // update routes
+
+    app.post('/updatebook/itbooks', book.bookUpdateITBookPOST);
+    app.post('/updatebook/history', book.bookUpdateHistoryBookPOST);
+    app.post('/updatebook/literature', book.bookUpdatePsychBookPOST);
+    app.post('/updatebook/psych', book.bookUpdateLiteratureBookPOST);
+    app.post('/updatebook/religion', book.bookUpdateReligionBookPOST);
+
 };

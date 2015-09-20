@@ -1,4 +1,10 @@
+var User = require('mongoose').model('User');
 var Book = require('mongoose').model('Book');
+var AdminLogs = require('mongoose').model('AdminLogs');
+var Request = require('mongoose').model('Request');
+var moment = require('moment');
+var ObjectID = require("bson-objectid");
+var async = require('async');
 
 // ADD IT BOOKS
 
@@ -134,4 +140,174 @@ phantom.create("--ignore-ssl-errors=yes", "--ssl-protocol=any", function (ph) {/
     });
 });
 
+};
+
+// *********** DELETE BOOK *************
+
+exports.bookDeleteITBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        bookname = req.body.bookName;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/itbooks');
+    });
+};
+
+exports.bookDeleteHistoryBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        bookname = req.body.bookName;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/history');
+    });
+};
+
+exports.bookDeletePsychBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        bookname = req.body.bookName;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/pyschbooks');
+    });
+};
+
+exports.bookDeleteLiteratureBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        bookname = req.body.bookName;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/literature');
+    });
+};
+
+exports.bookDeleteReligionBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        bookname = req.body.bookName;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/religion');
+    });
+};
+
+
+// ************ UPDATE BOOK ********************
+
+exports.bookUpdateITBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        booktitle = req.body.title,
+        bookisbn = req.body.isbn,
+        bookauthor = req.body.author,
+        bookstatus = req.body.status,
+        bookqty = req.body.qty;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set:
+        {
+            status: bookstatus,
+            isbn: bookisbn,
+            author: bookauthor,
+            qty: bookqty,
+            title: booktitle
+        }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/itbooks');
+    });
+};
+
+exports.bookUpdateHistoryBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        booktitle = req.body.title,
+        bookisbn = req.body.isbn,
+        bookauthor = req.body.author,
+        bookstatus = req.body.status,
+        bookqty = req.body.qty;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set:
+        {
+            status: bookstatus,
+            isbn: bookisbn,
+            author: bookauthor,
+            qty: bookqty,
+            title: booktitle
+        }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/history');
+    });
+};
+
+exports.bookUpdatePsychBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        booktitle = req.body.title,
+        bookisbn = req.body.isbn,
+        bookauthor = req.body.author,
+        bookstatus = req.body.status,
+        bookqty = req.body.qty;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set:
+        {
+            status: bookstatus,
+            isbn: bookisbn,
+            author: bookauthor,
+            qty: bookqty,
+            title: booktitle
+        }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/pyschbooks');
+    });
+};
+
+exports.bookUpdateLiteratureBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        booktitle = req.body.title,
+        bookisbn = req.body.isbn,
+        bookauthor = req.body.author,
+        bookstatus = req.body.status,
+        bookqty = req.body.qty;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set:
+        {
+            status: bookstatus,
+            isbn: bookisbn,
+            author: bookauthor,
+            qty: bookqty,
+            title: booktitle
+        }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/literature');
+    });
+};
+
+exports.bookUpdateReligionBookPOST = function (req, res) {
+    console.log(req.body);
+    var bookid = req.body.bookid,
+        booktitle = req.body.title,
+        bookisbn = req.body.isbn,
+        bookauthor = req.body.author,
+        bookstatus = req.body.status,
+        bookqty = req.body.qty;
+
+    Book.findByIdAndUpdate(ObjectID(bookid), { $set:
+        {
+            status: bookstatus,
+            isbn: bookisbn,
+            author: bookauthor,
+            qty: bookqty,
+            title: booktitle
+        }}, function (err, book) {
+        if (err) console.log(err);
+        res.redirect('/admin/dashboard/religion');
+    });
 };

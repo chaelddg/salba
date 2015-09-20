@@ -1,135 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+
     <title><%= title %></title>
-    <link rel="stylesheet" type="text/css" href="/lib/foundation/css/foundation.css">
-    <link rel="stylesheet" type="text/css" href="/lib/foundation-icon-fonts/foundation-icons.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/assets/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/assets/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="/assets/css/owl.carousel.css" type="text/css">
+    <link href="/assets/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="/assets/css/xcharts.min.css" rel=" stylesheet">
+    <link href="/assets/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/lib/datatable/media/css/jquery.dataTables.css">
-</head>
-<body>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+  </head>
 
-  <div class="off-canvas-wrap" data-offcanvas>
-    <div class="inner-wrap">
-      <nav class="tab-bar">
-        <section class="left-small">
-          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
-        </section>
+  <body>
+  <!-- container section start -->
 
-        <section class="middle tab-bar-section">
-          <h1 class="title">Admin</h1>
-        </section>
+      <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+            </div>
 
-        <section class="right">
-          <a href="/signout">Sign Out</a>
-        </section>
+            <!--logo start-->
+            <a href="/admin" class="logo">Lib <span class="lite">App</span></a>
+            <!--logo end-->
 
-      </nav>
+            <div class="top-nav notification-row">
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
 
-      <aside class="left-off-canvas-menu">
-        <ul class="off-canvas-list">
-          <li><label>Menu</label></li>
-          <li><a href="/admin/dashboard">Book Categories</a></li>
-          <li><a href="/admin/dashboard/logs">Logs</a></li>
-          <li><a href="/admin/dashboard/borrowers">Borrowers</a></li>
-          <li><a href="/admin/dashboard/borrowerreservelist">Borrowers Reserved List</a></li>
-          <li><a href="/admin/dashboard/borrowerrequest">Borrower Requests</a></li>
-        </ul>
+                    <!-- alert notification start-->
+                    <li id="alert_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                            <i class="icon-bell-l"></i>
+                            <span class="badge bg-important">7</span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">
+                            <div class="notify-arrow notify-arrow-blue"></div>
+                            <li>
+                                <p class="blue">You have 4 new notifications</p>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-primary"><i class="icon_profile"></i></span>
+                                    Friend Request
+                                    <span class="small italic pull-right">5 mins</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-warning"><i class="icon_pin"></i></span>
+                                    John location.
+                                    <span class="small italic pull-right">50 mins</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-danger"><i class="icon_book_alt"></i></span>
+                                    Project 3 Completed.
+                                    <span class="small italic pull-right">1 hr</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-success"><i class="icon_like"></i></span>
+                                    Mick appreciated your work.
+                                    <span class="small italic pull-right"> Today</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">See all notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- alert notification end-->
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="/assets/img/user-icon-default-small.jpg">
+                            </span>
+                            <span class="username">Admin</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li class="eborder-top">
+                            <li>
+                                <a href="/signout"><i class="icon_key_alt"></i> Log Out</a>
+                            </li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+      </header>
+      <!--header end-->
+
+      <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">Delete Borrower</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p id="accept-test"></p>
+                      <form method="POST" action="/admin/dashboard/borrowerresponse">
+                          <div class="row">
+                              <div class="large-12 columns">
+                                  <label>
+                                      <input type="hidden" value="" id="bookid" name="bookid" />
+                                  </label>
+                              </div>
+                          </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <button class="btn btn-danger" type="submit">Continue</button>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+      <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">Delete Borrower</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p id="decline-test"></p>
+                      <form method="POST" action="/admin/dashboard/borrwerdeleterequest">
+                          <div class="row">
+                              <div class="large-12 columns">
+                                  <label>
+                                     <input type="hidden" value="" id="declinebookid" name="declinebookid" />
+                                  </label>
+                              </div>
+                          </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <button class="btn btn-danger" type="submit">Continue</button>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu">
+                  <li class="active">
+                      <a class="" href="/admin">
+                          <i class="icon_house_alt"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
+          <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_document_alt"></i>
+                          <span>Menu</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">
+                          <li><a href="/admin/dashboard">Book Categories</a></li>
+                          <li><a href="/admin/dashboard/logs">Logs</a></li>
+                          <li><a href="/admin/dashboard/borrowers">Borrowers</a></li>
+                          <li><a href="/admin/dashboard/borrowerreservelist">Borrowers Reserved List</a></li>
+                          <li><a href="/admin/dashboard/borrowerrequest">Borrower Requests</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_table"></i>
+                          <span>Book Categories</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">
+                          <li><a href="/admin/dashboard/itbooks">IT Books</a></li>
+                          <li><a href="/admin/dashboard/pyschbooks">Psychology Books</a></li>
+                          <li><a href="/admin/dashboard/religion">Religion Books</a></li>
+                          <li><a href="/admin/dashboard/literature">Literature Books</a></li>
+                          <li><a href="/admin/dashboard/history">History Books</a></li>
+                      </ul>
+                  </li>
+
+
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
       </aside>
+      <!--sidebar end-->
 
-        <!-- MODAL -->
-        <div id="accept-modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-            <p id="accept-test"></p>
-            <form method="POST" action="/admin/dashboard/borrowerresponse">
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>
-                            <input type="hidden" value="" id="bookid" name="bookid" />
-                            <input type="submit" class="button small info" value="Accept Request" />
-                        </label>
-                    </div>
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!--overview start-->
+            <div class="row">
+              <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+                <ol class="breadcrumb">
+                  <li><i class="fa fa-home"></i><a href="/admin">Home</a></li>
+                  <li><i class="fa fa-laptop"></i>Logs</li>
+                </ol>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="panel">
+                  <div class="panel-body">
+                    Actions:
+                      &nbsp;&nbsp;&nbsp;
+                      <button class="btn btn-success">
+                        <a style="color:white" href="/print/printlogs" target="_blank"><i class="fa fa-print"> Print</i></a>
+                      </button>
+                  </div>
                 </div>
-            </form>
-            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-        </div>
+              </div>
+            </div>
 
-        <div id="decline-modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-            <p id="decline-test"></p>
-            <form method="POST" action="/admin/dashboard/borrwerdeleterequest">
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>
-                            <input type="hidden" value="" id="declinebookid" name="declinebookid" />
-                            <input type="submit" class="button small info" value="Decline Request" />
-                        </label>
-                    </div>
-                </div>
-            </form>
-            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-        </div>
-        <!-- END MODAL -->
+            <div class="row">
+              <div class="col-lg-12">
+                <table id="borrowers_table" style="margin-top: 10px; width: 100%">
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">Name</th>
+                      <th style="text-align: center">ISBN</th>
+                      <th style="text-align: center">Title</th>
+                      <th style="text-align: center">Author</th>
+                      <th style="text-align: center">Date</th>
+                      <th style="text-align: center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                     <% borrowerData.forEach(function(data, i) {%>
+                      <% if(data.status === "pending") { %>
+                          <tr>
+                            <td style="text-align: center" data-td="<%=data._id%>"><%= data.name %></td>
+                            <td style="text-align: center"><%= data.isbn %></td>
+                            <td style="text-align: center"><%= data.title %></td>
+                            <td style="text-align: center"><%= data.author %></td>
+                            <td style="text-align: center"><%= moment(data.added).format('llll') %></td>
+                            <td style="text-align: center">
+                                <button class="btn btn-success request-btn" data-toggle="modal" href="#acceptModal" id="<%= data._id %>"><i class="icon_floppy"></i></button>
+                                <button class="btn btn-danger decline-btn" data-toggle="modal" href="#declineModal" data-decline="<%= data._id %>" ><i class="icon_trash"></i></button>
+                            </td>
+                           </tr>
+                      <% } %>
+                    <% }); %>
+                  </tbody>
+                </table>
 
-      <section class="row" id="content-section">
+              </div>
+            </div><!--/.row-->
 
-        <nav class="breadcrumbs" style="margin-top: 10px" role="menubar" aria-label="breadcrumbs">
-          <li role="menuitem"><a href="/admin/dashboard">Category</a></li>
-          <li role="menuitem" class="current"><a href="#">Borrower Requests</a></li>
-        </nav>
-
-        <br />
-
-        <div>
-
-        <table id="borrowers_table" style="margin-top: 10px; width: 100%">
-          <thead>
-            <tr>
-              <th style="text-align: center">Name</th>
-              <th style="text-align: center">ISBN</th>
-              <th style="text-align: center">Title</th>
-              <th style="text-align: center">Author</th>
-              <th style="text-align: center">Date</th>
-              <th style="text-align: center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-             <% borrowerData.forEach(function(data, i) {%>
-              <% if(data.status === "pending") { %>
-                  <tr>
-                    <td style="text-align: center" data-td="<%=data._id%>"><%= data.name %></td>
-                    <td style="text-align: center"><%= data.isbn %></td>
-                    <td style="text-align: center"><%= data.title %></td>
-                    <td style="text-align: center"><%= data.author %></td>
-                    <td style="text-align: center"><%= moment(data.added).format('llll') %></td>
-                    <td style="text-align: center">
-                      <p style="padding-top: 28px">
-                         <i class="fi-save button tiny request-btn" data-reveal-id="accept-modal" id="<%= data._id %>" style="background-color: transparent; color: cornflowerblue; font-size: 24px"></i>
-                         <i class="fi-trash button tiny decline-btn" data-reveal-id="decline-modal" data-decline="<%= data._id %>" style="background-color: transparent; color: red; font-size: 24px"></i>
-                      </p>
-                    </td>
-                   </tr>
-              <% } %>
-            <% }); %>
-          </tbody>
-        </table>
-
-        </div>
-
-
+          </section>
       </section>
+      <!--main content end-->
 
-      <a class="exit-off-canvas"></a>
+    <!-- javascripts -->
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="/assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--script for this page only-->
+    <script src="/assets/js/jquery.rateit.min.js"></script>
+    <!-- custom select -->
+    <script src="/assets/js/jquery.customSelect.min.js" ></script>
+    <script src="/assets/assets/chart-master/Chart.js"></script>
 
-    </div>
-  </div>
+    <!--custome script for all page-->
+    <script src="/assets/js/scripts.js"></script>
+    <!-- custom script for this page-->
+    <script src="/assets/js/jquery.autosize.min.js"></script>
+    <script src="/assets/js/jquery.placeholder.min.js"></script>
+    <script src="/assets/js/morris.min.js"></script>
+    <script src="/assets/js/sparklines.js"></script>
+    <script src="/assets/js/charts.js"></script>
+    <script src="/assets/js/jquery.slimscroll.min.js"></script>
 
-    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/lib/foundation/js/foundation.js"></script>
     <script type="text/javascript" src="/lib/datatable/media/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="/assets/js/datatable.js"></script>
-    <script type="text/javascript" src="/assets/js/foundation.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+    <script>
+      $(document).ready(function () {
+
             var userId = $('#userId').val();
             var children = "";
 
@@ -141,11 +331,9 @@
                 var username = "";
 
                 var tdLength = document.getElementsByTagName("td");
-//                console.log(tdLength);
                 for(var td = 0; td < tdLength.length; td++) {
                     if($(tdLength[td]).attr("data-td") == productId) {
                         username = tdLength[td].textContent;
-//                        console.log(tdLength[td]);
                         break;
                     }
                 }
@@ -159,18 +347,18 @@
                 var username = "";
 
                 var tdLength = document.getElementsByTagName("td");
-//                console.log(tdLength);
                 for(var td = 0; td < tdLength.length; td++) {
                     if($(tdLength[td]).attr("data-td") == declineId) {
                         username = tdLength[td].textContent;
-//                        console.log(tdLength[td]);
                         break;
                     }
                 }
 
                 $('#decline-test').html("Decline book request from <i style=\"color: orange\"> " + username+ "<i> ?");
             });
+
         });
     </script>
-</body>
+
+  </body>
 </html>

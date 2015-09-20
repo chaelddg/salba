@@ -2,6 +2,8 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var mongoose = require('./config/mongoose'),
     express = require('./config/express'),
+    Primus = require('primus.io'),
+    http = require('http'),
     passport = require('./config/passport');
 
 var db = mongoose(),
@@ -10,7 +12,17 @@ var db = mongoose(),
 
 var port = Number(process.env.PORT || 4000);
 
-app.listen(port, function() {
+server = http.createServer(app);
+var primus = new Primus(server, { transformer: 'websockets', parser: 'JSON' });
+
+primus.on('connection', function(spark) {
+    spark.send('news', { hello: 'world' });
+    spark.on('my other event', function(data) {
+        console.log(data);
+    });
+});
+
+server.listen(port, function() {
     console.log('server on port ' + port);
 });
 
