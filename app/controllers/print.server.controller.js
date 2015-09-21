@@ -66,7 +66,7 @@ exports.printPsychBooksGET = function(req, res) {
       } else {
           console.log(data);
           res.render('prints/printBooks', {
-              title: 'Psych Books',
+              title: 'Psychology Books',
               bookData: data,
               moment: moment
           });
