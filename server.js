@@ -16,9 +16,10 @@ server = http.createServer(app);
 var primus = new Primus(server, { transformer: 'websockets', parser: 'JSON' });
 
 primus.on('connection', function(spark) {
-    spark.send('news', { hello: 'world' });
-    spark.on('my other event', function(data) {
+    spark.on('admin-notif', function(data) {
         console.log(data);
+        var notif_msg = data.book.toString();
+        primus.send('notif', { book: notif_msg });
     });
 });
 

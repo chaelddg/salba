@@ -24,8 +24,8 @@ module.exports = function(app) {
 
     app.post('/updatebook/itbooks', book.bookUpdateITBookPOST);
     app.post('/updatebook/history', book.bookUpdateHistoryBookPOST);
-    app.post('/updatebook/literature', book.bookUpdatePsychBookPOST);
-    app.post('/updatebook/psych', book.bookUpdateLiteratureBookPOST);
+    app.post('/updatebook/literature', book.bookUpdateLiteratureBookPOST);
+    app.post('/updatebook/psych', book.bookUpdatePsychBookPOST);
     app.post('/updatebook/religion', book.bookUpdateReligionBookPOST);
 
 };
