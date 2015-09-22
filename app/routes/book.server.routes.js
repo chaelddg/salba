@@ -28,4 +28,7 @@ module.exports = function(app) {
     app.post('/updatebook/psych', book.bookUpdatePsychBookPOST);
     app.post('/updatebook/religion', book.bookUpdateReligionBookPOST);
 
+    // GET ALL BOOKS
+    app.get('/book/booklist', book.bookListGET);
+
 };

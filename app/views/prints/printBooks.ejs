@@ -24,17 +24,18 @@
               </tr>
             </thead>
             <tbody>
-               <% bookData.forEach(function(data, i) {%>
-
-                <tr data-tr="<%= data._id %>">
-                  <td style="text-align: center"><%= data.isbn %></td>
-                  <td style="text-align: center" class="<%= data._id %>"><%= data.title %></td>
-                  <td style="text-align: center"><%= data.author %></td>
-                  <td style="text-align: center"><span><%= data.qty %></span></td>
-                  <td style="text-align: center"><span><%= moment(data.added).format('llll') %></span></td>
-                  <td style="text-align: center"><span><%= data.status %></span></td>
-                 </tr>
-              <% }); %>
+                <% if(bookData) { %>
+                  <% bookData.forEach(function(data, i) {%>
+                    <tr data-tr="<%= data._id %>">
+                      <td style="text-align: center"><%= data.isbn %></td>
+                      <td style="text-align: center" class="<%= data._id %>"><%= data.title %></td>
+                      <td style="text-align: center"><%= data.author %></td>
+                      <td style="text-align: center"><span><%= data.qty %></span></td>
+                      <td style="text-align: center"><span><%= moment(data.added).format('llll') %></span></td>
+                      <td style="text-align: center"><span><%= data.status %></span></td>
+                    </tr>
+                  <% }); %>
+                <% } %>
             </tbody>
           </table>
         </div>

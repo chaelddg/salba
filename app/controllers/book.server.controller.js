@@ -311,3 +311,24 @@ exports.bookUpdateReligionBookPOST = function (req, res) {
         res.redirect('/admin/dashboard/religion');
     });
 };
+
+// ********* BOOK LIST *****************
+
+exports.bookListGET = function(req, res) {
+
+    Book.find().exec(function(err, books) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (req.user && req.user.role == 'admin') {
+                res.render('admin/adminBookList', {
+                  title: 'Book List',
+                  books: books
+                });
+              } else {
+                  return res.redirect('/');
+              }
+          }
+    });
+
+};

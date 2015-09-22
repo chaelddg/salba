@@ -604,4 +604,3 @@ exports.adminBorrowerLogsGET = function(req, res) {
   });
 };
 
-

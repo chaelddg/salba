@@ -14,4 +14,7 @@ module.exports = function(app) {
     app.get('/print/printlogs', print.printLogsGET);
     app.get('/print/user/printlogs', print.printLogsUserGET);
 
+    // print selection
+    app.post('/print/selection', print.printSelectionGET);
+
 };

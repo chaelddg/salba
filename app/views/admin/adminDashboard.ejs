@@ -115,6 +115,7 @@
                       </a>
                       <ul class="sub">
                           <li><a href="/admin/dashboard">Book Categories</a></li>
+                          <li><a href="/book/booklist">Book List</a></li>
                           <li><a href="/admin/dashboard/logs">Logs</a></li>
                           <li><a href="/admin/dashboard/borrowers">Borrowers</a></li>
                           <li><a href="/admin/dashboard/borrowerreservelist">Borrowers Reserved List</a></li>
@@ -130,10 +131,10 @@
                       </a>
                       <ul class="sub">
                           <li><a href="/admin/dashboard/itbooks">IT Books</a></li>
-                          <li><a href="/admin/dashboard/pyschbooks">Psychology Books</a></li>
-                          <li><a href="/admin/dashboard/religion">Religion Books</a></li>
-                          <li><a href="/admin/dashboard/literature">Literature Books</a></li>
-                          <li><a href="/admin/dashboard/history">History Books</a></li>
+                          <li><a href="/admin/dashboard/psychbooks">Psychology Books</a></li>
+                          <li><a href="/admin/dashboard/religionbooks">Religion Books</a></li>
+                          <li><a href="/admin/dashboard/literaturebooks">Literature Books</a></li>
+                          <li><a href="/admin/dashboard/historybooks">History Books</a></li>
                       </ul>
                   </li>
 
@@ -169,7 +170,7 @@
               </div><!--/.col-->
 
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                <a href="/admin/dashboard/pyschbooks">
+                <a href="/admin/dashboard/psychbooks">
                   <div class="info-box brown-bg">
                     <i class="fa fa-book"></i>
                     <div class="count">Psychology</div>
@@ -178,7 +179,7 @@
               </div><!--/.col-->
 
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                <a href="/admin/dashboard/religion">
+                <a href="/admin/dashboard/religionbooks">
                   <div class="info-box green-bg">
                     <i class="fa fa-book"></i>
                     <div class="count">Religion</div>
@@ -187,7 +188,7 @@
               </div><!--/.col-->
 
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                <a href="/admin/dashboard/literature">
+                <a href="/admin/dashboard/literaturebooks">
                   <div class="info-box pink-bg">
                     <i class="fa fa-book"></i>
                     <div class="count">Literature</div>
@@ -196,7 +197,7 @@
               </div><!--/.col-->
 
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                <a href="/admin/dashboard/history">
+                <a href="/admin/dashboard/historybooks">
                   <div class="info-box orange-bg">
                     <i class="fa fa-book"></i>
                     <div class="count">History</div>
@@ -311,7 +312,7 @@
             x++;
           }
 
-          $('#notif-ul').append('<li><a href="#"><span class="label label-success"><i class="icon_book_alt"></i></span> '+data.book+'<span class="small italic pull-right">1 hr</span></a></li>');
+          $('#notif-ul').append('<li><a href="/admin/dashboard/borrowerrequest"><span class="label label-success"><i class="icon_book_alt"></i></span> '+data.book+'</a></li>');
           $('#notif-count').text(x);
 
 

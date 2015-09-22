@@ -28,10 +28,10 @@ module.exports = function(app) {
 
     // BOOK CATEGOGIES
     app.get('/admin/dashboard/itbooks', admin.adminITBooksGET);
-    app.get('/admin/dashboard/pyschbooks', admin.adminPyschBooksGET);
-    app.get('/admin/dashboard/religion', admin.adminReligionBooksGET);
-    app.get('/admin/dashboard/literature', admin.adminLiteratureBooksGET);
-    app.get('/admin/dashboard/history', admin.adminHistoryBooksGET);
+    app.get('/admin/dashboard/psychbooks', admin.adminPyschBooksGET);
+    app.get('/admin/dashboard/religionbooks', admin.adminReligionBooksGET);
+    app.get('/admin/dashboard/literaturebooks', admin.adminLiteratureBooksGET);
+    app.get('/admin/dashboard/historybooks', admin.adminHistoryBooksGET);
 
     //BOOK REQUEST
     app.post('/admin/dashboard/borrowerrequest', admin.adminBorrowerRequestPOST);

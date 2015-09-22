@@ -90,6 +90,39 @@
       </header>
       <!--header end-->
 
+      <!-- ************** START MODAL ************ -->
+
+         <div class="modal fade" id="printChoiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">Select Print</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p id="delete-lead"></p>
+                    <p id="delete-test"></p>
+                    <form method="POST" action="/deletebook/itbooks">
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>
+                                  <button class="btn btn-success" type="button">Print All</button>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+
+
+      <!-- ************** END MODAL ************ -->
+
       <!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse ">
@@ -139,86 +172,98 @@
       </aside>
       <!--sidebar end-->
 
-        <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title">Delete Borrower</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p id="decline-test"></p>
-                      <form method="POST" action="/admin/dashboard/borrwerdecline">
-                          <div class="row">
-                              <div class="large-12 columns">
-                                  <label>
-                                      <input type="hidden" value="" id="decline_reqid" name="decline_reqid" />
-                                  </label>
-                              </div>
-                          </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                        <button class="btn btn-danger" type="submit">Continue</button>
-                    </div>
-                  </form>
-              </div>
-          </div>
-      </div>
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
               <!--overview start-->
             <div class="row">
               <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+                <h3 class="page-header"><i class="fa fa-laptop"></i> Book List</h3>
                 <ol class="breadcrumb">
                   <li><i class="fa fa-home"></i><a href="/admin">Home</a></li>
-                  <li><i class="fa fa-laptop"></i>Logs</li>
+                  <li><i class="fa fa-laptop"></i>Book List</li>
                 </ol>
               </div>
 
+              <div class="col-lg-12">
+                <div class="panel">
+                  <div class="panel-body">
+                      <form action="/print/selection" method="POST">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Category</label>
+                          <div class="col-sm-10">
+                            <select id="category" name="status" class="form-control input-md m-bot15">
+                                <option value="all">All</option>
+                                <option value="itbooks">IT</option>
+                                <option value="psychbooks">Psychology</option>
+                                <option value="religionbooks">Religion</option>
+                                <option value="literaturebooks">Literature</option>
+                                <option value="historybooks">History</option>
+                            </select>
+                          </div>
+                        </div> <!-- END FORM GROUP -->
+                        <div class="form-group">
+                            <label class="control-label col-lg-2" for="inputSuccess">Print Option</label>
+                            <div class="col-lg-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="all" checked>
+                                        Print All
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="available">
+                                        Print ONLY Available
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="obsolete">
+                                        Print ONLY Obsolete
+                                    </label>
+                                </div>
+                                <div>
+                                    <button class="btn btn-success" type="submit" style="color:white"><i class="fa fa-print"> Print</i></button>
+                                </div>
+                            </div>
+                        </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="row">
               <div class="col-lg-12">
-                <table id="inventory_table" style="margin-top: 10px; width: 100%">
+                <table id="borrowers_table" style="margin-top: 10px; width: 100%">
                   <thead>
                     <tr>
-                      <th style="text-align: center">Request ID</th>
+                      <th style="text-align: center">ISBN</th>
                       <th style="text-align: center">Title</th>
                       <th style="text-align: center">Author</th>
-                      <th style="text-align: center">Dute Date</th>
+                      <th style="text-align: center">Category</th>
                       <th style="text-align: center">Status</th>
-                      <th style="text-align: center">Action</th>
+                      <th style="text-align: center">Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
-                     <% bookData.forEach(function(data, i) {%>
-
+                    <% books.forEach(function(data, i) {%>
                       <tr>
-                        <td style="text-align: center"><%= data._id %></td>
+                        <td style="text-align: center"><%= data.isbn %></td>
                         <td style="text-align: center"><%= data.title %></td>
                         <td style="text-align: center"><%= data.author %></td>
-                        <td style="text-align: center"><%= data.due_date ? moment(data.due_date).format('llll') : " --- " %></td>
-                        <td style="text-align: center">
-                          <p style="padding-top: 28px">
-                              <i style="color: orange; font-size: 16px"> <%= data.status %></i>
-                          </p>
-                        </td>
-                        <td style="text-align: center">
-                              <p style="padding-top: 28px">
-                                <!--  <i class="fi-save button tiny request-btn" data-reveal-id="accept-modal" id="<%= data._id %>" style="background-color: transparent; color: cornflowerblue; font-size: 24px"></i> -->
-                                <button class="btn btn-danger decline-btn" data-toggle="modal" href="#declineModal" data-decline="<%= data._id %>"><i class="icon_trash"></i></button>
-                              </p>
-                            </td>
-                       </tr>
+                        <td style="text-align: center"><%= data.category %></td>
+                        <td style="text-align: center"><%= data.status %></td>
+                        <td style="text-align: center"><%= data.qty %></td>
+                      </tr>
                     <% }); %>
                   </tbody>
                 </table>
-
               </div>
             </div><!--/.row-->
+
+            <div id="hiddenParsed" style="display:none"></div>
 
           </section>
       </section>
@@ -226,55 +271,34 @@
 
     <!-- javascripts -->
     <script src="/assets/js/jquery.js"></script>
-    <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
-    <script src="/assets/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-    <!-- bootstrap -->
     <script src="/assets/js/bootstrap.min.js"></script>
     <!-- nice scroll -->
     <script src="/assets/js/jquery.scrollTo.min.js"></script>
     <script src="/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <!--script for this page only-->
-    <script src="/assets/js/jquery.rateit.min.js"></script>
-    <!-- custom select -->
-    <script src="/assets/js/jquery.customSelect.min.js" ></script>
-    <script src="/assets/assets/chart-master/Chart.js"></script>
 
-    <!--custome script for all page-->
+    <!-- jquery ui -->
+    <script src="/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <!--custom checkbox & radio-->
+    <script type="text/javascript" src="/assets/js/ga.js"></script>
+    <!--custom switch-->
+    <script src="/assets/js/bootstrap-switch.js"></script>
+    <!--custom tagsinput-->
+    <script src="/assets/js/jquery.tagsinput.js"></script>
+
+    <!-- bootstrap-wysiwyg -->
+    <script src="/assets/js/jquery.hotkeys.js"></script>
+    <script src="/assets/js/bootstrap-wysiwyg.js"></script>
+    <script src="/assets/js/bootstrap-wysiwyg-custom.js"></script>
+    <!-- ck editor -->
+    <script type="text/javascript" src="/assets/assets/ckeditor/ckeditor.js"></script>
+    <!-- custom form component script for this page-->
+    <script src="/assets/js/form-component.js"></script>
+    <!-- custome script for all page -->
     <script src="/assets/js/scripts.js"></script>
-    <!-- custom script for this page-->
-    <script src="/assets/js/jquery.autosize.min.js"></script>
-    <script src="/assets/js/jquery.placeholder.min.js"></script>
-    <script src="/assets/js/morris.min.js"></script>
-    <script src="/assets/js/sparklines.js"></script>
-    <script src="/assets/js/charts.js"></script>
-    <script src="/assets/js/jquery.slimscroll.min.js"></script>
 
     <script type="text/javascript" src="/lib/datatable/media/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="/assets/js/datatable.js"></script>
-
-    <script>
-        $(document).ready(function() {
-
-          var getId = window.location.href.split("/");
-          var userID = getId[getId.length-1];
-
-          $(".request-btn").click(function(e) {
-            var requestID = $(this).attr("id");
-            console.log(requestID);
-            $("#accept_reqid").val(requestID);
-            $("#accept-test").html("Add Request <i style=\"color: green\">" + requestID + "</i> to Borrower");
-          });
-
-          $(".decline-btn").click(function(e) {
-            var requestID = $(this).attr("data-decline");
-            console.log(requestID);
-            $("#decline_reqid").val(requestID);
-            $("#decline-test").html("Delete Request <i style=\"color: red\">" + requestID + "</i>");
-          });
-
-        });
-    </script>
 
     <script src="/primus/primus.io.js"></script>
 
@@ -296,6 +320,28 @@
             // primus.send('my other event', { my: 'data' });
           });
 
+          var host = window.location.origin;
+          $("#category").click(function() {
+            var currentValue = $(this).val();
+            console.log(currentValue);
+            // $.ajax({
+            //   method: "GET",
+            //   url: host +"/admin/dashboard/"+currentValue,
+            //   data: currentValue,
+            //   success: function(data) {
+            //     console.log(data);
+            //     // var returnHTML = $(data).parent;
+            //     console.log(typeof data);
+            //     // conso4le.log(returnHTML);
+            //     var x = $("#hiddenParsed").html(data);
+            //     console.log(x);
+            //     console.log(typeof x);
+            //     var tableGET = document.getElementById('inventory_table').innerHTML;
+            //     console.log(tableGET);
+
+            //   }
+            // });
+          });
 
       });
   </script>
