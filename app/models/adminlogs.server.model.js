@@ -38,6 +38,9 @@ var AdminLogsSchema = new Schema({
         type: String,
         required: 'Category is required'
     },
+    returned: {
+        type: Date
+    },
     created: {
         type: Date,
         default: Date.now

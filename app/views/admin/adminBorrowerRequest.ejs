@@ -97,9 +97,9 @@
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       <h4 class="modal-title">Accept Borrower</h4>
                   </div>
+                  <form method="POST" id="accept_form" action="/admin/dashboard/borrowerresponse">
                   <div class="modal-body">
                     <p id="accept-test"></p>
-                      <form method="POST" action="/admin/dashboard/borrowerresponse">
                           <div class="row">
                               <div class="large-12 columns">
                                   <label>
@@ -124,9 +124,10 @@
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       <h4 class="modal-title">Delete Borrower</h4>
                   </div>
+                  <form method="POST" id="decline_form" action="/admin/dashboard/borrwerdeleterequest">
                   <div class="modal-body">
                     <p id="decline-test"></p>
-                      <form method="POST" action="/admin/dashboard/borrwerdeleterequest">
+
                           <div class="row">
                               <div class="large-12 columns">
                                   <label>
@@ -203,6 +204,8 @@
                 <ol class="breadcrumb">
                   <li><i class="fa fa-home"></i><a href="/admin">Home</a></li>
                   <li><i class="fa fa-laptop"></i>Borrower Request</li>
+                  <!-- <li><button id="accept-req-btn">test</button></li> -->
+
                 </ol>
               </div>
 
@@ -276,15 +279,21 @@
     <script type="text/javascript" src="/lib/datatable/media/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="/assets/js/datatable.js"></script>
 
+    <script src="/primus/primus.io.js"></script>
+
     <script>
-      $(document).ready(function () {
+      $(document).ready(function() {
+          var primus = new Primus('http://localhost:4000/');
+          var global_data;
+          primus.on('open', function() {
 
             var userId = $('#userId').val();
             var children = "";
+            var productId;
 
             var host = window.location.origin;
             $(".request-btn").click(function (e) {
-                var productId = $(this).attr("id");
+                productId = $(this).attr("id");
                 console.log(productId);
                 $('#bookid').val(productId);
                 var username = "";
@@ -316,27 +325,41 @@
                 $('#decline-test').html("Decline book request from <i style=\"color: orange\"> " + username+ "<i> ?");
             });
 
-        });
-    </script>
+              primus.on('notif', function (data) {
+                console.log(data);
+                global_data = data.userid;
+                var x = 0;
+                for(var i in data) {
+                  x++;
+                }
 
-    <script src="/primus/primus.io.js"></script>
-
-    <script>
-      $(document).ready(function() {
-          var primus = new Primus('http://localhost:4000/');
-
-          primus.on('notif', function (data) {
-            console.log(data);
-            var x = 0;
-            for(var i in data) {
-              x++;
-            }
-
-            $('#notif-ul').append('<li><a href="/admin/dashboard/borrowerrequest"><span class="label label-success"><i class="icon_book_alt"></i></span> '+data.book+'</a></li>');
-            $('#notif-count').text(x);
+                $('#notif-ul').append('<li><a href="/admin/dashboard/borrowerrequest"><span class="label label-success"><i class="icon_book_alt"></i></span> '+data.book+'</a></li>');
+                $('#notif-count').text(x);
 
 
-            // primus.send('my other event', { my: 'data' });
+                // primus.send('my other event', { my: 'data' });
+
+
+              });
+
+              primus.on('test', function(data) {
+                console.log(data);
+              });
+
+              $('#decline_form').submit(function() {
+                   console.log('**** admin ====> user DECLINE ********* ' );
+                   primus.send('join', {data: productId, word: 'declined'});
+                });
+
+               $('#accept_form').submit(function() {
+                   console.log('**** admin ====> user ACCEPT ********* ' );
+                   primus.send('join', {data: productId, word: 'accepted'});
+                });
+
+
+
+
+
           });
 
 

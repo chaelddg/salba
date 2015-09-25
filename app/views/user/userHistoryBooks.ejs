@@ -245,6 +245,13 @@
                 window.location.reload();
               }, 1000);
           });
+
+          primus.on('user-notif', function(data) {
+              console.log(data);
+
+              $('#notif-ul').append('<li><a href="/dashboard/reserved"><span class="label label-success"><i class="icon_book_alt"></i></span> '+data+'</a></li>');
+              $('#notif-count').text("1");
+            });
       });
     </script>
   </body>

@@ -180,6 +180,7 @@
                       <th style="text-align: center">Author</th>
                       <th style="text-align: center">Category</th>
                       <th style="text-align: center">Date</th>
+                      <th style="text-align: center">Returned Date</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -196,6 +197,7 @@
                             <td style="text-align: center"><%= data.author %></td>
                             <td style="text-align: center"><%= data.category %></td>
                             <td style="text-align: center"><%= data.created ? moment(data.created).format('llll') : " --- "%></td>
+                            <td style="text-align: center"><%= data.returned ? moment(data.returned).format('llll') : " --- "%></td>
 
                         <% }); %>
                      <% } %>

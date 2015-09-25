@@ -36,6 +36,7 @@ module.exports = function(app) {
     //BOOK REQUEST
     app.post('/admin/dashboard/borrowerrequest', admin.adminBorrowerRequestPOST);
     app.post('/admin/dashboard/borrowerresponse', admin.adminBorrowerResponsePOST);
+    app.post('/admin/dashboard/returnbook', admin.adminReturnBookRequestPOST);
     app.post('/admin/dashboard/borrwerdecline', admin.adminDeclineBookRequestPOST);
     app.post('/admin/dashboard/borrwerdeleterequest', admin.adminBorrowerDeleteRequestPOST);
 
