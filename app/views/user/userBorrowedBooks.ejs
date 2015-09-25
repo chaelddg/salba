@@ -247,11 +247,27 @@
           });
 
           primus.on('user-notif', function(data) {
-            console.log(data);
+              console.log(data);
 
-            $('#notif-ul').append('<li><a href="/dashboard/reserved"><span class="label label-success"><i class="icon_book_alt"></i></span> '+data+'</a></li>');
-            $('#notif-count').text("1");
-          });
+              switch(data) {
+                case "request accepted":
+                    console.log("**** CLIENT ACCEPT *******");
+                    $('#notif-ul').append('<li><a href="/dashboard/reserved"><span class="label label-success"><i class="icon_book_alt"></i></span> '+data+'</a></li>');
+                    $('#notif-count').text("1");
+                break;
+
+                case "request declined":
+                    console.log("**** CLIENT DECLINE *******");
+                    $('#notif-ul').append('<li><a href="/"><span class="label label-danger"><i class="icon_book_alt"></i></span> '+data+'</a></li>');
+                    $('#notif-count').text("1");
+                break;
+
+                default:
+                break;
+
+              }
+
+            });
       });
     </script>
   </body>

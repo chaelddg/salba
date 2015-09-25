@@ -40,7 +40,7 @@ exports.addNewPyschBookPOST = function(req, res) {
             console.log(err);
         } else {
            if (req.user && req.user.role == 'admin') {
-              res.redirect('/admin/dashboard/pyschbooks');
+              res.redirect('/admin/dashboard/psychbooks');
             } else {
                 return res.redirect('/');
             }
@@ -61,7 +61,7 @@ exports.addNewReligionBookPOST = function(req, res) {
             console.log(err);
         } else {
            if (req.user && req.user.role == 'admin') {
-              res.redirect('/admin/dashboard/religion');
+              res.redirect('/admin/dashboard/religionbooks');
             } else {
                 return res.redirect('/');
             }
@@ -82,7 +82,7 @@ exports.addNewLiteratureBookPOST = function(req, res) {
             console.log(err);
         } else {
            if (req.user && req.user.role == 'admin') {
-              res.redirect('/admin/dashboard/literature');
+              res.redirect('/admin/dashboard/literaturebooks');
             } else {
                 return res.redirect('/');
             }
@@ -103,7 +103,7 @@ exports.addNewHistoryBookPOST = function(req, res) {
             console.log(err);
         } else {
            if (req.user && req.user.role == 'admin') {
-              res.redirect('/admin/dashboard/history');
+              res.redirect('/admin/dashboard/historybooks');
             } else {
                 return res.redirect('/');
             }
@@ -162,7 +162,7 @@ exports.bookDeleteHistoryBookPOST = function (req, res) {
 
     Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
         if (err) console.log(err);
-        res.redirect('/admin/dashboard/history');
+        res.redirect('/admin/dashboard/historybooks');
     });
 };
 
@@ -173,7 +173,7 @@ exports.bookDeletePsychBookPOST = function (req, res) {
 
     Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
         if (err) console.log(err);
-        res.redirect('/admin/dashboard/pyschbooks');
+        res.redirect('/admin/dashboard/psychbooks');
     });
 };
 
@@ -184,7 +184,7 @@ exports.bookDeleteLiteratureBookPOST = function (req, res) {
 
     Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
         if (err) console.log(err);
-        res.redirect('/admin/dashboard/literature');
+        res.redirect('/admin/dashboard/literaturebooks');
     });
 };
 
@@ -195,7 +195,7 @@ exports.bookDeleteReligionBookPOST = function (req, res) {
 
     Book.findByIdAndUpdate(ObjectID(bookid), { $set: { status: 'obsolete' }}, function (err, book) {
         if (err) console.log(err);
-        res.redirect('/admin/dashboard/religion');
+        res.redirect('/admin/dashboard/religionbooks');
     });
 };
 
@@ -242,7 +242,7 @@ exports.bookUpdateHistoryBookPOST = function (req, res) {
             title: booktitle
         }}, function (err, book) {
         if (err) console.log(err);
-        res.redirect('/admin/dashboard/history');
+        res.redirect('/admin/dashboard/historybooks');
     });
 };
 
@@ -264,7 +264,7 @@ exports.bookUpdatePsychBookPOST = function (req, res) {
             title: booktitle
         }}, function (err, book) {
         if (err) console.log(err);
-        res.redirect('/admin/dashboard/pyschbooks');
+        res.redirect('/admin/dashboard/psychbooks');
     });
 };
 
@@ -286,7 +286,7 @@ exports.bookUpdateLiteratureBookPOST = function (req, res) {
             title: booktitle
         }}, function (err, book) {
         if (err) console.log(err);
-        res.redirect('/admin/dashboard/literature');
+        res.redirect('/admin/dashboard/literaturebooks');
     });
 };
 
@@ -308,7 +308,7 @@ exports.bookUpdateReligionBookPOST = function (req, res) {
             title: booktitle
         }}, function (err, book) {
         if (err) console.log(err);
-        res.redirect('/admin/dashboard/religion');
+        res.redirect('/admin/dashboard/religionbooks');
     });
 };
 
